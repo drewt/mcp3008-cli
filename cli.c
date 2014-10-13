@@ -22,10 +22,9 @@
 #define SPI_BUS_MAX 0
 #define SPI_CS_MAX  1
 
+static char inputs[8] = {0};
 static int spi_bus = 0;
 static int spi_cs  = 0;
-static int adc_channel = 0;
-static int read_all = 0;
 static int verbose = 0;
 
 static struct option long_options[] = {
@@ -62,6 +61,7 @@ static int parse_int(const char *str, int min, int max)
 
 void parse_opts(int argc, char *argv[])
 {
+	int explicit_inputs = 0;
 	for (;;) {
 		int options_index = 0;
 		int c = getopt_long(argc, argv, "ab:c:hi:v", long_options, &options_index);
@@ -70,7 +70,8 @@ void parse_opts(int argc, char *argv[])
 			break;
 		switch (c) {
 		case 'a':
-			read_all = 1;
+			for (int i = 0; i < 8; i++)
+				inputs[i] = 1;
 			break;
 		case 'b':
 			spi_bus = parse_int(optarg, 0, SPI_BUS_MAX);
@@ -81,7 +82,8 @@ void parse_opts(int argc, char *argv[])
 		case 'h':
 			usage(EXIT_SUCCESS);
 		case 'i':
-			adc_channel = parse_int(optarg, 0, 7);
+			inputs[parse_int(optarg, 0, 7)] = 1;
+			explicit_inputs = 1;
 			break;
 		case 'v':
 			verbose = 1;
@@ -92,6 +94,9 @@ void parse_opts(int argc, char *argv[])
 			usage(EXIT_FAILURE);
 		}
 	}
+	/* read input 0 by default */
+	if (!explicit_inputs)
+		inputs[0] = 1;
 }
 
 static void print_level(int spi_fd, int channel)
@@ -120,11 +125,9 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	if (read_all) {
-		for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 8; i++) {
+		if (inputs[i])
 			print_level(fd, i);
-	} else {
-		print_level(fd, adc_channel);
 	}
 
 	return 0;

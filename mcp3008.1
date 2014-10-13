@@ -54,7 +54,9 @@ Display usage information and exit.
 
 \fB\-i,\-\-input\fR \fI<CHANNEL>\fR
 .RS
-Use the MCP3008 input channel \fI<CHANNEL>\fR.
+Read the MCP3008 input channel \fI<CHANNEL>\fR.  If this option is given
+multiple times, all specified channels are read, and their levels are printed
+in ascending order of their channel numbers.
 .RE
 
 \fB\-v,\-\-verbose\fR
