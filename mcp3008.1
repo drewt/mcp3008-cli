@@ -1,0 +1,68 @@
+.\" Copyright (c) 2013 Drew Thoreson
+.\"
+.\" %%%LICENSE_START(VERBATIM)
+.\" Permission is granted to make and distribute verbatim copies of this
+.\" manual provided the copyright notice and this permission notice are
+.\" preserved on all copies.
+.\"
+.\" Permission is granted to copy and distribute modified versions of this
+.\" manual under the conditions for verbatim copying, provided that the
+.\" entire resulting derived work is distributed under the terms of a
+.\" permission notice identical to this one.
+.\"
+.\" This manual page may be incorrect or out-of-date.  The author(s) assume
+.\" no responsibility for errors or omissions, or for damages resulting from
+.\" the use of the information contained herein.  The author(s) may not
+.\" have taken the same level of care in the production of this manual,
+.\" which is licensed free of charge, as they might when working
+.\" professionally.
+.\"
+.\" Formatted or processed versions of this manual, if unaccompanied by
+.\" the source, must acknowledge the copyright and authors of this work.
+.\" %%%LICENSE_END
+.\"
+.TH MCP3008 1 10/12/2014 Linux "mcp3008 Manual"
+.nh
+.ad 1
+.SH NAME
+mcp3008 - read from the MCP3008 ADC
+.SH SYNOPSIS
+mcp3008 [OPTION]...
+.SH DESCRIPTION
+\fBmcp3008\fR is a command line tool for reading from the MCP3008 analog to
+digital converter.
+.SH OPTIONS
+\fB\-a,\-\-all\fR
+.RS
+Read all MCP3008 input channels.
+.RE
+
+\fB\-b,\-\-bus\fR \fI<BUS>\fR
+.RS
+Use the SPI bus \fI<BUS>\fR.
+.RE
+
+\fB\-c,\-\-chip-select\fR \fI<CS>\fR
+.RS
+Use the SPI chip-select \fI<CS>\fR.
+.RE
+
+\fB\-h,\-\-help\fR
+.RS
+Display usage information and exit.
+.RE
+
+\fB\-i,\-\-input\fR \fI<CHANNEL>\fR
+.RS
+Use the MCP3008 input channel \fI<CHANNEL>\fR.
+.RE
+
+\fB\-v,\-\-verbose\fR
+.RS
+Print extra information at run time.
+.RE
+.SH BUGS
+You can submit bugs to the issue tracker on Github
+(https://github.com/drewt/mcp3008-cli/issues).
+.SH AUTHOR
+This program was written by Drew Thoreson <drew@lambdati.me>.
